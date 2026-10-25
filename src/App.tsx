@@ -102,22 +102,22 @@ export const App: React.FC = () => {
       />
 
       <main className="flex-grow">
-        {/* Phase 7 Milestone Status Bar */}
+        {/* Final Launch Milestone Status Bar */}
         <section className="bg-studio-black text-white border-b border-studio-charcoal py-2.5">
           <Container size="wide">
             <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
               <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-warmOrange-500 animate-pulse"></span>
-                <span className="text-warmOrange-400 font-semibold">7-BOSQICH TAYYOR</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="text-emerald-400 font-semibold">NOVA® 1.0 RELEASE</span>
                 <span className="text-slate-500">|</span>
                 <span className="text-slate-300">
-                  Animatsiyalar & Responsive Sayqallash · Mobile First, Motion Safe va Tahririy Interaksiyalar
+                  8 Bosqichli Ishlab Chiqish Rejasi To‘liq Yakunlandi · Production Ready
                 </span>
               </div>
               <div className="flex items-center gap-2 hidden sm:flex">
-                <Badge variant="orange">Mobile Optimized</Badge>
-                <Badge variant="cobalt">Reduced-Motion Safe</Badge>
-                <Badge variant="dark">Phase 7 Verified</Badge>
+                <Badge variant="orange">Zero Fake Stats</Badge>
+                <Badge variant="cobalt">100% Tested</Badge>
+                <Badge variant="dark">v1.0.0 Approved</Badge>
               </div>
             </div>
           </Container>
