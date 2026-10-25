@@ -15,15 +15,18 @@ import {
 
 interface BriefSuccessViewProps {
   data: ProjectBriefData;
+  referenceCode?: string;
   onReset: () => void;
 }
 
 export const BriefSuccessView: React.FC<BriefSuccessViewProps> = ({
   data,
+  referenceCode: propRefCode,
   onReset,
 }) => {
   const [copied, setCopied] = useState(false);
   const [referenceCode] = useState(() => {
+    if (propRefCode) return propRefCode;
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     return `NV-BRIEF-2026-${randomNum}`;
   });

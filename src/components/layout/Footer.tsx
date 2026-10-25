@@ -6,9 +6,10 @@ import { ArrowUpRight } from 'lucide-react';
 interface FooterProps {
   onNavigate?: (id: string) => void;
   onOpenFinder?: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenFinder }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenFinder, onOpenAdmin }) => {
   const currentYear = new Date().getFullYear();
 
   const handleLink = (id: string, isFinder?: boolean) => {
@@ -95,6 +96,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenFinder }) => {
                   className="text-slate-400 hover:text-white transition-colors"
                 >
                   Loyiha briefi (Ariza)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={onOpenAdmin}
+                  className="text-warmOrange-400/90 hover:text-warmOrange-300 transition-colors font-mono text-xs flex items-center gap-1.5 pt-1"
+                >
+                  <span>Studiya Boshqaruvi (Admin)</span>
+                  <span className="text-[10px] bg-warmOrange-950 text-warmOrange-400 px-1.5 py-0.5 border border-warmOrange-800">
+                    Lead CMS
+                  </span>
                 </button>
               </li>
             </ul>

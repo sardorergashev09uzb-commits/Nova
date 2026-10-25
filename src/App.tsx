@@ -15,18 +15,45 @@ import { Badge } from './components/ui/Badge';
 import { CaseStudy } from './types/portfolio';
 import { RecommendationResult } from './types/solution-finder';
 import { ProjectBriefData } from './types/brief';
+import { AdminDashboardView } from './components/admin/AdminDashboardView';
+import { AdminLoginModal } from './components/admin/AdminLoginModal';
 
 export const App: React.FC = () => {
-  const [activeView, setActiveView] = useState<'landing' | 'case-study'>('landing');
+  const [activeView, setActiveView] = useState<'landing' | 'case-study' | 'admin'>('landing');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
   const [prefilledService, setPrefilledService] = useState<string>('');
   const [finderAnswers, setFinderAnswers] = useState<Record<string, string>>({});
   const [, setFinderResult] = useState<RecommendationResult | null>(null);
 
+  // Admin Portal State
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('nova_admin_session') === 'active';
+    }
+    return false;
+  });
+  const [showAdminLoginModal, setShowAdminLoginModal] = useState(false);
+
   // Scroll to top when switching between main view and deep-dive
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeView, selectedCaseStudy]);
+
+  // Support #admin hash navigation directly in URL
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#admin') {
+        if (isAdminLoggedIn) {
+          setActiveView('admin');
+        } else {
+          setShowAdminLoginModal(true);
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, [isAdminLoggedIn]);
 
   const handleOpenCaseStudy = (study: CaseStudy) => {
     setSelectedCaseStudy(study);
@@ -92,6 +119,40 @@ export const App: React.FC = () => {
     }
   };
 
+  const handleOpenAdmin = () => {
+    if (isAdminLoggedIn) {
+      setActiveView('admin');
+    } else {
+      setShowAdminLoginModal(true);
+    }
+  };
+
+  const handleAdminLoginSuccess = () => {
+    setIsAdminLoggedIn(true);
+    sessionStorage.setItem('nova_admin_session', 'active');
+    setShowAdminLoginModal(false);
+    setActiveView('admin');
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdminLoggedIn(false);
+    sessionStorage.removeItem('nova_admin_session');
+    setActiveView('landing');
+    if (window.location.hash === '#admin') {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  };
+
+  // If active view is Admin Dashboard, render full admin portal
+  if (activeView === 'admin' && isAdminLoggedIn) {
+    return (
+      <AdminDashboardView
+        onBackToSite={() => setActiveView('landing')}
+        onLogout={handleAdminLogout}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-studio-bgLight text-studio-dark font-sans selection:bg-warmOrange-500 selection:text-white">
       {/* Site Header */}
@@ -99,25 +160,32 @@ export const App: React.FC = () => {
         onNavigate={handleNavigate}
         onOpenFinder={handleOpenFinder}
         onOpenBrief={() => handleOpenBrief()}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       <main className="flex-grow">
-        {/* Final Launch Milestone Status Bar */}
+        {/* Release Milestone Status Bar */}
         <section className="bg-studio-black text-white border-b border-studio-charcoal py-2.5">
           <Container size="wide">
             <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-emerald-400 font-semibold">NOVA® 1.0 RELEASE</span>
+                <span className="text-emerald-400 font-semibold">NOVA® FULLSTACK RELEASE</span>
                 <span className="text-slate-500">|</span>
                 <span className="text-slate-300">
-                  8 Bosqichli Ishlab Chiqish Rejasi To‘liq Yakunlandi · Production Ready
+                  Vercel Serverless Backend & Editorial Lead Admin Panel Faol
                 </span>
               </div>
               <div className="flex items-center gap-2 hidden sm:flex">
-                <Badge variant="orange">Zero Fake Stats</Badge>
-                <Badge variant="cobalt">100% Tested</Badge>
-                <Badge variant="dark">v1.0.0 Approved</Badge>
+                <button
+                  type="button"
+                  onClick={handleOpenAdmin}
+                  className="hover:underline text-warmOrange-400 cursor-pointer"
+                >
+                  <Badge variant="orange">Admin: nova2026</Badge>
+                </button>
+                <Badge variant="cobalt">Serverless API</Badge>
+                <Badge variant="dark">Vercel Ready</Badge>
               </div>
             </div>
           </Container>
@@ -164,7 +232,7 @@ export const App: React.FC = () => {
               prefilledType={prefilledService}
               finderAnswers={finderAnswers}
               onBriefSubmitted={(submittedData: ProjectBriefData) => {
-                console.log('Project brief submitted locally:', submittedData);
+                console.log('Project brief saved to storage:', submittedData);
               }}
             />
 
@@ -178,7 +246,18 @@ export const App: React.FC = () => {
       </main>
 
       {/* Site Footer */}
-      <Footer onNavigate={handleNavigate} onOpenFinder={handleOpenFinder} />
+      <Footer
+        onNavigate={handleNavigate}
+        onOpenFinder={handleOpenFinder}
+        onOpenAdmin={handleOpenAdmin}
+      />
+
+      {/* Studio Admin Passcode Login Modal */}
+      <AdminLoginModal
+        isOpen={showAdminLoginModal}
+        onClose={() => setShowAdminLoginModal(false)}
+        onSuccess={handleAdminLoginSuccess}
+      />
     </div>
   );
 };

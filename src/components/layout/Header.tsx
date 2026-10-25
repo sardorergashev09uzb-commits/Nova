@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from './Container';
 import { Button } from '../ui/Button';
-import { Menu, X, ArrowUpRight, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ArrowRight, Lock } from 'lucide-react';
 
 interface HeaderProps {
   onNavigate?: (sectionId: string) => void;
   onOpenBrief?: () => void;
   onOpenFinder?: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onNavigate,
   onOpenBrief,
   onOpenFinder,
+  onOpenAdmin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -115,7 +117,17 @@ export const Header: React.FC<HeaderProps> = ({
             </nav>
 
             {/* CTA & Mobile Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <button
+                type="button"
+                onClick={onOpenAdmin}
+                className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-slate-600 hover:text-studio-black border border-slate-200 hover:border-slate-400 bg-white transition-colors cursor-pointer"
+                title="Studiya boshqaruv paneli"
+              >
+                <Lock className="w-3 h-3 text-warmOrange-600" />
+                <span>Admin</span>
+              </button>
+
               <Button
                 variant="primary"
                 size="sm"
@@ -186,6 +198,17 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 Loyiha briefini boshlash
               </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenAdmin) onOpenAdmin();
+                }}
+                className="w-full text-center py-2 text-xs font-mono uppercase tracking-wider text-slate-500 hover:text-studio-black flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <Lock className="w-3.5 h-3.5 text-warmOrange-600" />
+                <span>Studiya Admin Paneli (Boshqaruv)</span>
+              </button>
               <div className="text-center text-[11px] font-mono text-studio-muted">
                 Toshkent · Masofaviy studiya hamkorligi
               </div>

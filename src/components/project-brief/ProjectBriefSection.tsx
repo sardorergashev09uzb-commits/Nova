@@ -15,6 +15,7 @@ import { StepFeaturesScope } from './StepFeaturesScope';
 import { StepBudgetTimeline } from './StepBudgetTimeline';
 import { StepReviewSubmit } from './StepReviewSubmit';
 import { BriefSuccessView } from './BriefSuccessView';
+import { BriefStorageService } from '../../services/briefStorage';
 import {
   FileText,
   ArrowRight,
@@ -71,6 +72,7 @@ export const ProjectBriefSection: React.FC<ProjectBriefSectionProps> = ({
   const [errors, setErrors] = useState<BriefValidationErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasPrefilledNotice, setHasPrefilledNotice] = useState(false);
+  const [submittedRefCode, setSubmittedRefCode] = useState<string>('');
 
   // Sync prefill from Solution Finder
   useEffect(() => {
@@ -212,7 +214,11 @@ export const ProjectBriefSection: React.FC<ProjectBriefSectionProps> = ({
 
   const handleSubmit = () => {
     setIsSubmitting(true);
-    // Simulate brief processing
+    // Generate clean ref code and save to backend storage
+    const refCode = `NV-BRIEF-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+    BriefStorageService.saveBrief(data, refCode);
+    setSubmittedRefCode(refCode);
+
     setTimeout(() => {
       setIsSubmitting(false);
       setCurrentStep('success');
@@ -380,6 +386,7 @@ export const ProjectBriefSection: React.FC<ProjectBriefSectionProps> = ({
           {currentStep === 'success' && (
             <BriefSuccessView
               data={data}
+              referenceCode={submittedRefCode}
               onReset={handleReset}
             />
           )}
