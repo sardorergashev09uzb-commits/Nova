@@ -17,7 +17,13 @@ export const studioServices: ServiceItem[] = [
     ],
     deliverables: ["Dizayn prototipi", "Responsive frontend kod", "SEO meta-taglar", "Forma & Telegram xabarnoma"],
     typicalTimeline: "1–2 hafta",
-    pricingIndicator: "Boshlang‘ich daraja"
+    pricingIndicator: "Boshlang‘ich daraja",
+    comparisonMetrics: {
+      pagesCount: "1 ta bittalik sahifa (One-pager)",
+      targetAudience: "Reklama va ijtimoiy tarmoqlardan kelgan yangi mijozlar",
+      conversionFocus: "Tezkor ariza / Kontakt qoldirish",
+      contentComplexity: "Ixcham, lo‘nda va kuchli sarlavhalar"
+    }
   },
   {
     id: "business-website",
@@ -35,7 +41,13 @@ export const studioServices: ServiceItem[] = [
     ],
     deliverables: ["Design System", "Ko‘p sahifali veb-platforma", "Keyslar taqdimoti", "Boshqaruv qulayligi"],
     typicalTimeline: "3–4 hafta",
-    pricingIndicator: "O‘rta daraja"
+    pricingIndicator: "O‘rta daraja",
+    comparisonMetrics: {
+      pagesCount: "5–12 ta asosiy va ichki sahifalar",
+      targetAudience: "B2B hamkorlar, yirik mijozlar, investorlar",
+      conversionFocus: "Kompaniya nufuzini mustahkamlash & Hamkorlik so‘rovi",
+      contentComplexity: "To‘liq kompaniya tarixi, metodologiya va keyslar"
+    }
   },
   {
     id: "product-catalog",
@@ -53,7 +65,13 @@ export const studioServices: ServiceItem[] = [
     ],
     deliverables: ["Katalog arxitekturasi", "Filtrlar mexanizmi", "Mahsulot sahifalari", "Savatcha yoki buyurtma shakli"],
     typicalTimeline: "4–6 hafta",
-    pricingIndicator: "Ilg‘or daraja"
+    pricingIndicator: "Ilg‘or daraja",
+    comparisonMetrics: {
+      pagesCount: "Katalog + Toifalar + 50+ tovar kartalari",
+      targetAudience: "Ulgurji va chakana xaridorlar, dilerlar",
+      conversionFocus: "Filtrlash orqali tovar tanlash & Savat / So‘rov",
+      contentComplexity: "Katta ma'lumotlar bazasi, fotosuratlar va parametrlar"
+    }
   },
   {
     id: "custom-web-app",
@@ -71,6 +89,12 @@ export const studioServices: ServiceItem[] = [
     ],
     deliverables: ["Texnik arxitektura", "Frontend & API integratsiya", "Foydalanuvchi qo‘llanmasi", "Uzoq muddatli qo‘llab-quvvatlash"],
     typicalTimeline: "6–10 hafta",
-    pricingIndicator: "Individual byudjet"
+    pricingIndicator: "Individual byudjet",
+    comparisonMetrics: {
+      pagesCount: "Modulli interfeyslar, dashboard va kabinetlar",
+      targetAudience: "Xodimlar, ro‘yxatdan o‘tgan mijozlar, administratorlar",
+      conversionFocus: "Jarayonlarni tezlashtirish & Avtomatlashtirish",
+      contentComplexity: "Dinamik mantiq, hisob-kitob algoritmlari, API ma'lumotlari"
+    }
   }
 ];

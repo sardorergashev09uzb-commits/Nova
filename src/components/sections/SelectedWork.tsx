@@ -4,14 +4,16 @@ import { Eyebrow } from '../ui/Eyebrow';
 import { Heading } from '../ui/Heading';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
-import { Card } from '../ui/Card';
 import { conceptualCaseStudies } from '../../data/caseStudies';
 import { CaseStudy } from '../../types/portfolio';
-import { ArrowUpRight, X, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { ArrowUpRight, AlertCircle, ArrowRight } from 'lucide-react';
 
-export const SelectedWork: React.FC = () => {
+interface SelectedWorkProps {
+  onOpenCaseStudy?: (study: CaseStudy) => void;
+}
+
+export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenCaseStudy }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [activeModalStudy, setActiveModalStudy] = useState<CaseStudy | null>(null);
 
   const categories = ['All', 'Landing Page', 'Business Website', 'Product Catalog', 'Custom Web App'];
 
@@ -65,7 +67,8 @@ export const SelectedWork: React.FC = () => {
           {filteredStudies.map((study, idx) => (
             <div
               key={study.id}
-              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 flex flex-col justify-between"
+              onClick={() => onOpenCaseStudy && onOpenCaseStudy(study)}
+              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 flex flex-col justify-between cursor-pointer"
             >
               <div className="p-8 space-y-6">
                 {/* Meta Bar */}
@@ -126,128 +129,17 @@ export const SelectedWork: React.FC = () => {
               {/* Card Footer Action */}
               <div className="px-8 py-5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                 <span className="text-xs font-mono text-studio-muted">
-                  Batafsil tahlilni o‘qish
+                  Batafsil keys tahlili
                 </span>
-                <button
-                  onClick={() => setActiveModalStudy(study)}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cobalt-600 hover:text-cobalt-800 transition-colors cursor-pointer"
-                >
-                  <span>Keysni ochish</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+                <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cobalt-600 group-hover:text-cobalt-800 transition-colors">
+                  <span>To‘liq ochish</span>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </span>
               </div>
             </div>
           ))}
         </div>
       </Container>
-
-      {/* Case Study Detailed Modal View */}
-      {activeModalStudy && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-studio-border shadow-2xl relative">
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-studio-border p-6 flex items-center justify-between z-10">
-              <div className="flex items-center gap-3">
-                <Badge variant="cobalt">{activeModalStudy.category}</Badge>
-                <span className="text-xs font-mono uppercase text-studio-muted">
-                  Konseptual Keys
-                </span>
-              </div>
-              <button
-                onClick={() => setActiveModalStudy(null)}
-                className="p-1.5 text-studio-dark hover:text-warmOrange-600 border border-slate-200 hover:border-warmOrange-500 transition-colors cursor-pointer"
-                aria-label="Yopish"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 sm:p-10 space-y-8">
-              <div className="space-y-3">
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-studio-black">
-                  {activeModalStudy.title}
-                </h2>
-                <p className="text-base sm:text-lg text-studio-muted leading-relaxed">
-                  {activeModalStudy.subtitle}
-                </p>
-                <div className="text-xs font-mono text-slate-500 pt-1">
-                  Mijoz yo‘nalishi: {activeModalStudy.clientType}
-                </div>
-              </div>
-
-              {/* Problem Block */}
-              <div className="p-6 bg-red-50/40 border border-red-200/60 space-y-2">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-red-700 font-bold">
-                  01 / Biznes Muammosi
-                </h4>
-                <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
-                  {activeModalStudy.problem}
-                </p>
-              </div>
-
-              {/* Approach Block */}
-              <div className="p-6 bg-blue-50/40 border border-blue-200/60 space-y-2">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-cobalt-700 font-bold">
-                  02 / Kreativ Yondashuv
-                </h4>
-                <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
-                  {activeModalStudy.approach}
-                </p>
-              </div>
-
-              {/* Solution Block */}
-              <div className="p-6 bg-studio-black text-white border border-studio-charcoal space-y-2">
-                <h4 className="text-xs font-mono uppercase tracking-widest text-warmOrange-400 font-bold">
-                  03 / Amalga Oshirilgan Yechim
-                </h4>
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                  {activeModalStudy.solution}
-                </p>
-              </div>
-
-              {/* Deliverables List */}
-              <div className="space-y-3 pt-2">
-                <h4 className="font-mono text-xs uppercase tracking-widest text-studio-black font-bold">
-                  Topshirilgan mahsulotlar (Deliverables):
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {activeModalStudy.deliverables.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm text-studio-dark">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Metrics Context Note */}
-              <div className="p-4 bg-slate-100 border border-slate-200 text-xs font-mono text-slate-600">
-                <span className="font-bold text-slate-800">Kontekst natijasi: </span>
-                {activeModalStudy.metricsContext}
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="bg-studio-bgLight border-t border-studio-border p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs font-mono text-studio-muted">
-                Shu kabi loyiha sizning biznesingizga ham kerakmi?
-              </span>
-              <Button
-                variant="warm"
-                size="md"
-                icon="arrow-right"
-                onClick={() => {
-                  setActiveModalStudy(null);
-                  document.getElementById('brief-cta')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Loyiha briefini yuborish
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

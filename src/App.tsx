@@ -1,101 +1,155 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
 import { ServicesPreview } from './components/sections/ServicesPreview';
 import { SelectedWork } from './components/sections/SelectedWork';
+import { ServiceComparisonMatrix } from './components/services/ServiceComparisonMatrix';
+import { CaseStudyDeepDiveView } from './components/case-studies/CaseStudyDeepDiveView';
 import { ProcessSection } from './components/sections/ProcessSection';
 import { SolutionFinderTeaser } from './components/sections/SolutionFinderTeaser';
 import { FinalCtaSection } from './components/sections/FinalCtaSection';
 import { Container } from './components/layout/Container';
 import { Badge } from './components/ui/Badge';
 import { Button } from './components/ui/Button';
-import { X, CheckCircle2, Compass, FileText, ArrowRight } from 'lucide-react';
+import { CaseStudy } from './types/portfolio';
+import { X, CheckCircle2, Compass, FileText, ArrowLeft } from 'lucide-react';
 
 export const App: React.FC = () => {
+  const [activeView, setActiveView] = useState<'landing' | 'case-study'>('landing');
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+  const [prefilledService, setPrefilledService] = useState<string>('');
   const [activeModal, setActiveModal] = useState<'finder-info' | 'brief-info' | null>(null);
 
+  // Scroll to top when view changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeView, selectedCaseStudy]);
+
+  const handleOpenCaseStudy = (study: CaseStudy) => {
+    setSelectedCaseStudy(study);
+    setActiveView('case-study');
+  };
+
+  const handleBackToLanding = () => {
+    setActiveView('landing');
+    setSelectedCaseStudy(null);
+  };
+
   const handleOpenFinder = () => {
-    const el = document.getElementById('solution-finder-teaser');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (activeView !== 'landing') {
+      setActiveView('landing');
+      setTimeout(() => {
+        document.getElementById('solution-finder-teaser')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById('solution-finder-teaser')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleOpenBrief = () => {
-    const el = document.getElementById('brief-cta');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const handleOpenBrief = (serviceCategory?: string) => {
+    if (serviceCategory) {
+      setPrefilledService(serviceCategory);
+    }
+    if (activeView !== 'landing') {
+      setActiveView('landing');
+      setTimeout(() => {
+        document.getElementById('brief-cta')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById('brief-cta')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleSelectService = (serviceId: string) => {
-    const el = document.getElementById('brief-cta');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const handleNavigate = (sectionId: string) => {
+    if (activeView !== 'landing') {
+      setActiveView('landing');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-studio-bgLight text-studio-dark font-sans selection:bg-warmOrange-500 selection:text-white">
-      {/* Site Header */}
+      {/* Site Header with functional navigation */}
       <Header
+        onNavigate={handleNavigate}
         onOpenFinder={handleOpenFinder}
-        onOpenBrief={handleOpenBrief}
+        onOpenBrief={() => handleOpenBrief()}
       />
 
       <main className="flex-grow">
-        {/* Phase 3 Milestone Indicator Bar */}
+        {/* Phase 4 Milestone Bar */}
         <section className="bg-studio-black text-white border-b border-studio-charcoal py-2.5">
           <Container size="wide">
             <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span className="text-emerald-400 font-semibold">3-BOSQICH TAYYOR</span>
+                <span className="text-emerald-400 font-semibold">4-BOSQICH TAYYOR</span>
                 <span className="text-slate-500">|</span>
-                <span className="text-slate-300">To‘liq Landing Page, Hero & Bo‘limlar Arxitekturasi</span>
+                <span className="text-slate-300">Services & Portfolio Deep-Dive · Shaffof Keyslar Arxitekturasi</span>
               </div>
               <div className="flex items-center gap-2 hidden sm:flex">
-                <Badge variant="cobalt">Hero Active</Badge>
-                <Badge variant="orange">Services & Works</Badge>
-                <Badge variant="dark">Vite Build Pass</Badge>
+                <Badge variant="cobalt">Comparison Matrix</Badge>
+                <Badge variant="orange">4 Deep-Dive Studies</Badge>
+                <Badge variant="dark">Phase 4 Verified</Badge>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* 1. Hero Section */}
-        <Hero
-          onExploreServices={() => {
-            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          onExploreFinder={handleOpenFinder}
-        />
+        {/* View Switch: Case Study Detail or Full Landing */}
+        {activeView === 'case-study' && selectedCaseStudy ? (
+          <CaseStudyDeepDiveView
+            study={selectedCaseStudy}
+            onBack={handleBackToLanding}
+            onStartBriefWithService={(cat) => handleOpenBrief(cat)}
+          />
+        ) : (
+          <>
+            {/* 1. Hero Section */}
+            <Hero
+              onExploreServices={() => handleNavigate('services')}
+              onExploreFinder={handleOpenFinder}
+            />
 
-        {/* 2. Services Preview Section */}
-        <ServicesPreview
-          onSelectService={handleSelectService}
-          onOpenFinder={handleOpenFinder}
-        />
+            {/* 2. Services Preview Section */}
+            <ServicesPreview
+              onSelectService={(serviceId) => handleOpenBrief(serviceId)}
+              onOpenFinder={handleOpenFinder}
+            />
 
-        {/* 3. Selected Work (Conceptual Portfolio) */}
-        <SelectedWork />
+            {/* 3. Service Comparison Matrix (New in Phase 4) */}
+            <ServiceComparisonMatrix
+              onSelectService={(serviceId) => handleOpenBrief(serviceId)}
+              onOpenFinder={handleOpenFinder}
+            />
 
-        {/* 4. Process Overview */}
-        <ProcessSection />
+            {/* 4. Selected Work with Deep-Dive trigger */}
+            <SelectedWork onOpenCaseStudy={handleOpenCaseStudy} />
 
-        {/* 5. Solution Finder Teaser */}
-        <SolutionFinderTeaser onStartFinder={() => setActiveModal('finder-info')} />
+            {/* 5. Process Overview */}
+            <ProcessSection />
 
-        {/* 6. Final Call to Action */}
-        <FinalCtaSection
-          onOpenBrief={() => setActiveModal('brief-info')}
-          onOpenFinder={handleOpenFinder}
-        />
+            {/* 6. Solution Finder Teaser */}
+            <SolutionFinderTeaser onStartFinder={() => setActiveModal('finder-info')} />
+
+            {/* 7. Final Call to Action */}
+            <FinalCtaSection
+              onOpenBrief={() => setActiveModal('brief-info')}
+              onOpenFinder={handleOpenFinder}
+            />
+          </>
+        )}
       </main>
 
       {/* Site Footer */}
-      <Footer onOpenFinder={handleOpenFinder} />
+      <Footer onNavigate={handleNavigate} onOpenFinder={handleOpenFinder} />
 
       {/* Info Modal for Solution Finder Roadmap Notice */}
       {activeModal === 'finder-info' && (
@@ -118,12 +172,12 @@ export const App: React.FC = () => {
                 Interaktiv Solution Finder
               </h3>
               <p className="text-sm text-studio-muted leading-relaxed">
-                Ushbu vosita 5-bosqichda to‘liq ko‘p bosqichli interaktiv forma ko‘rinishida ishga tushadi: savollarga javob berish, orqaga qaytish va javoblarni saqlash imkoniyatiga ega bo‘ladi.
+                Ushbu vosita navbatdagi 5-bosqichda to‘liq ko‘p bosqichli interaktiv forma ko‘rinishida ishga tushadi: savollarga javob berish, orqaga qaytish va javoblarni saqlash imkoniyatiga ega bo‘ladi.
               </p>
             </div>
 
             <div className="p-4 bg-studio-bgLight border border-slate-200 text-xs font-mono space-y-2">
-              <div className="font-bold text-studio-black">Tayyorlangan mantiqiy qoidalar:</div>
+              <div className="font-bold text-studio-black">Mantiqiy qoidalar:</div>
               <div className="flex items-center gap-2 text-slate-700">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>4 xil biznes formati bo‘yicha avtomatik tavsiya</span>
@@ -168,6 +222,11 @@ export const App: React.FC = () => {
                 Ko‘p Bosqichli Project Brief
               </h3>
               <p className="text-sm text-studio-muted leading-relaxed">
+                {prefilledService ? (
+                  <span className="font-semibold text-cobalt-600">
+                    Tanlangan format: {prefilledService}.{' '}
+                  </span>
+                ) : null}
                 Loyiha arizasi (Brief) shakli 6-bosqichda to‘liq ishga tushadi: kontakt ma'lumotlari, sayt turi, kerakli sahifalar, byudjet va tekshirish (review) qadamlari bilan jihozlanadi.
               </p>
             </div>
