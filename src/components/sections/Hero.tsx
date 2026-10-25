@@ -63,12 +63,13 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onExploreFinder }
             </p>
 
             {/* Interactive CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
               <Button
                 variant="primary"
                 size="lg"
                 icon="arrow-right"
                 onClick={onExploreServices || (() => handleScrollTo('services'))}
+                className="w-full sm:w-auto justify-center"
               >
                 Xizmatlar & Yechimlar
               </Button>
@@ -78,6 +79,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onExploreFinder }
                 size="lg"
                 icon="arrow-up-right"
                 onClick={onExploreFinder || (() => handleScrollTo('solution-finder-teaser'))}
+                className="w-full sm:w-auto justify-center"
               >
                 Solution Finder (Tavsiya)
               </Button>
@@ -86,6 +88,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onExploreFinder }
                 variant="outline"
                 size="lg"
                 onClick={() => handleScrollTo('portfolio')}
+                className="w-full sm:w-auto justify-center"
               >
                 Keyslarni ko‘rish
               </Button>

@@ -102,22 +102,22 @@ export const App: React.FC = () => {
       />
 
       <main className="flex-grow">
-        {/* Phase 6 Milestone Status Bar */}
+        {/* Phase 7 Milestone Status Bar */}
         <section className="bg-studio-black text-white border-b border-studio-charcoal py-2.5">
           <Container size="wide">
             <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-warmOrange-500 animate-pulse"></span>
-                <span className="text-warmOrange-400 font-semibold">6-BOSQICH TAYYOR</span>
+                <span className="text-warmOrange-400 font-semibold">7-BOSQICH TAYYOR</span>
                 <span className="text-slate-500">|</span>
                 <span className="text-slate-300">
-                  Ko‘p Bosqichli Project Brief · Tizimli Validatsiya, Tekshirish va Demo Yakuni
+                  Animatsiyalar & Responsive Sayqallash · Mobile First, Motion Safe va Tahririy Interaksiyalar
                 </span>
               </div>
               <div className="flex items-center gap-2 hidden sm:flex">
-                <Badge variant="orange">State Preserved</Badge>
-                <Badge variant="cobalt">Finder Prefill Active</Badge>
-                <Badge variant="dark">Phase 6 Verified</Badge>
+                <Badge variant="orange">Mobile Optimized</Badge>
+                <Badge variant="cobalt">Reduced-Motion Safe</Badge>
+                <Badge variant="dark">Phase 7 Verified</Badge>
               </div>
             </div>
           </Container>

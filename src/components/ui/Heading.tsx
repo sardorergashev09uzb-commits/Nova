@@ -16,10 +16,10 @@ export const Heading: React.FC<HeadingProps> = ({
   dark = false,
 }) => {
   const sizeStyles = {
-    hero: 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95]',
-    display: 'text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]',
-    title: 'text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight leading-tight',
-    subhead: 'text-xl sm:text-2xl font-medium tracking-tight leading-snug',
+    hero: 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[1.0] break-words',
+    display: 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] break-words',
+    title: 'text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight break-words',
+    subhead: 'text-lg sm:text-xl md:text-2xl font-medium tracking-tight leading-snug break-words',
   };
 
   const colorStyles = dark ? 'text-white' : 'text-studio-black';

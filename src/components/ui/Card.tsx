@@ -21,7 +21,7 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const hoverClass = hoverEffect
-    ? 'transition-all duration-300 hover:border-cobalt-600 hover:-translate-y-1'
+    ? 'motion-elevate hover:border-cobalt-600'
     : '';
 
   return (

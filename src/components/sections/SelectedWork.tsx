@@ -68,7 +68,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenCaseStudy }) =
             <div
               key={study.id}
               onClick={() => onOpenCaseStudy && onOpenCaseStudy(study)}
-              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 motion-elevate flex flex-col justify-between cursor-pointer"
             >
               <div className="p-8 space-y-6">
                 {/* Meta Bar */}

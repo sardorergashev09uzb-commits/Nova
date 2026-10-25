@@ -57,7 +57,7 @@ export const ServicesPreview: React.FC<ServicesPreviewProps> = ({
               <button
                 key={service.id}
                 onClick={() => setActiveServiceId(service.id)}
-                className={`text-left p-4 sm:p-6 transition-all duration-200 border cursor-pointer ${
+                className={`text-left p-4 sm:p-6 transition-all duration-200 border cursor-pointer motion-elevate ${
                   isActive
                     ? 'border-cobalt-600 bg-cobalt-50/50 shadow-sm'
                     : 'border-studio-border hover:border-slate-400 bg-studio-bgLight/40'
