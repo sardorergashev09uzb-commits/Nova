@@ -20,7 +20,8 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'Xizmatlar', id: 'services' },
     { label: 'Portfolio', id: 'portfolio' },
     { label: 'Solution Finder', id: 'solution-finder', isSpecial: true },
-    { label: 'Studiya haqida', id: 'about' },
+    { label: 'Brief', id: 'brief' },
+    { label: 'Jarayon', id: 'process' },
   ];
 
   const handleLinkClick = (id: string, isSpecial?: boolean) => {
