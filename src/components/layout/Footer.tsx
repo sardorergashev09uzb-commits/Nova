@@ -98,17 +98,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenFinder, onOpen
                   Loyiha briefi (Ariza)
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={onOpenAdmin}
-                  className="text-warmOrange-400/90 hover:text-warmOrange-300 transition-colors font-mono text-xs flex items-center gap-1.5 pt-1"
-                >
-                  <span>Studiya Boshqaruvi (Admin)</span>
-                  <span className="text-[10px] bg-warmOrange-950 text-warmOrange-400 px-1.5 py-0.5 border border-warmOrange-800">
-                    Lead CMS
-                  </span>
-                </button>
-              </li>
             </ul>
           </div>
 
@@ -150,8 +139,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenFinder, onOpen
 
         {/* Bottom bar with legal & ethics disclaimer */}
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500 font-mono">
-          <div>
-            © {currentYear} NOVA® Digital Studio. Barcha huquqlar himoyalangan.
+          <div className="flex items-center gap-1">
+            <span>© {currentYear} NOVA® Digital Studio. Barcha huquqlar himoyalangan.</span>
+            {onOpenAdmin && (
+              <button
+                type="button"
+                onClick={onOpenAdmin}
+                className="opacity-0 hover:opacity-60 text-[9px] text-slate-600 transition-opacity cursor-pointer ml-2"
+                title="Studiya Portali"
+                aria-label="Admin"
+              >
+                ·
+              </button>
+            )}
           </div>
           <div className="text-[11px] text-slate-500 max-w-md">
             Mustaqil raqamli studiya konseptsiyasi. Sun'iy sharhlar va soxta natijalarsiz, haqiqiy dizayn qadriyatlariga asoslangan.

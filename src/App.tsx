@@ -15,6 +15,7 @@ import { Badge } from './components/ui/Badge';
 import { CaseStudy } from './types/portfolio';
 import { RecommendationResult } from './types/solution-finder';
 import { ProjectBriefData } from './types/brief';
+import { MarqueeRibbon } from './components/ui/MarqueeRibbon';
 import { AdminDashboardView } from './components/admin/AdminDashboardView';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
 
@@ -170,22 +171,16 @@ export const App: React.FC = () => {
             <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
               <div className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-emerald-400 font-semibold">NOVA® FULLSTACK RELEASE</span>
+                <span className="text-emerald-400 font-semibold">NOVA® DIGITAL STUDIO</span>
                 <span className="text-slate-500">|</span>
                 <span className="text-slate-300">
-                  Vercel Serverless Backend & Editorial Lead Admin Panel Faol
+                  Creative Direction · Bespoke Web Architecture & Interactive Experiences
                 </span>
               </div>
               <div className="flex items-center gap-2 hidden sm:flex">
-                <button
-                  type="button"
-                  onClick={handleOpenAdmin}
-                  className="hover:underline text-warmOrange-400 cursor-pointer"
-                >
-                  <Badge variant="orange">Admin: nova2026</Badge>
-                </button>
-                <Badge variant="cobalt">Serverless API</Badge>
-                <Badge variant="dark">Vercel Ready</Badge>
+                <Badge variant="orange">Creative Studio</Badge>
+                <Badge variant="cobalt">Serverless Architecture</Badge>
+                <Badge variant="dark">2026 Edition</Badge>
               </div>
             </div>
           </Container>
@@ -205,6 +200,9 @@ export const App: React.FC = () => {
               onExploreServices={() => handleNavigate('services')}
               onExploreFinder={handleOpenFinder}
             />
+
+            {/* Live Infinite Marquee Ribbon */}
+            <MarqueeRibbon variant="dark" />
 
             {/* 2. Services Preview Section */}
             <ServicesPreview
@@ -234,6 +232,19 @@ export const App: React.FC = () => {
               onBriefSubmitted={(submittedData: ProjectBriefData) => {
                 console.log('Project brief saved to storage:', submittedData);
               }}
+            />
+
+            {/* Studio Philosophy Marquee */}
+            <MarqueeRibbon
+              variant="orange"
+              items={[
+                'INDIVIDUAL ART DIRECTION',
+                'TRANSPARENT VALUE MATRIX',
+                'ZERO GENERIC TEMPLATES',
+                'STRUCTURED BRIEF ENGINE',
+                'RAPID ITERATION CYCLE',
+                'BESPOKE CODEBASE',
+              ]}
             />
 
             {/* 8. Final Call to Action */}

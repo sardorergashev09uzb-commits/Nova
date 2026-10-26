@@ -13,6 +13,9 @@ export interface CaseStudy {
   deliverables: string[];
   metricsContext: string;
   featured?: boolean;
+  imageUrl?: string;
+  accentColor?: string;
+  mockupType?: 'dashboard' | 'editorial' | 'catalog' | 'landing';
   // Deep-dive fields for Phase 4
   challengeDetails?: string[];
   strategyPoints?: string[];

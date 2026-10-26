@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectBriefData } from '../../types/brief';
 import { Button } from '../ui/Button';
+import { ConfettiCanvas } from '../ui/ConfettiCanvas';
 import {
   CheckCircle2,
   Copy,
@@ -93,7 +94,10 @@ Sana: ${new Date().toLocaleDateString('uz-UZ')}
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300">
+    <div className="space-y-8 animate-in fade-in duration-300 relative">
+      {/* Celebration Confetti */}
+      <ConfettiCanvas />
+
       {/* Top Banner */}
       <div className="bg-white border-2 border-emerald-600 p-6 sm:p-8 relative">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">

@@ -51,9 +51,14 @@ npm run dev
 
 Brauzeringizda oching: `http://localhost:5173/`
 
-### 🔑 Admin Panel Demo Kirishi:
-* Parol: `nova2026`
-* Manzil: Saytning yuqori menyusidagi **`[🔒 Admin]`** tugmasi yoki `http://localhost:5173/#admin`
+### 🔐 Studiya Boshqaruv Paneli (Admin Lead CMS):
+
+Studiya arizalari (leadlar) va loyiha holatlarini boshqarish paneli xavfsizlik va estetik maqsadida asosiy sayt menyusida ochiq ko‘rsatilmaydi. 
+
+Portfolio ko‘ruvchilar va rekruterlar tizimni sinab ko‘rishi uchun:
+1. Sayt havolasi oxiriga **`/#admin`** qo‘shing (masalan: `https://your-nova.vercel.app/#admin` yoki mahalliy `http://localhost:5173/#admin`).
+2. Kirish paroli (Studio Passcode): **`nova2026`**
+3. Tizimda barcha arizalar, statuslarni boshqarish, ichki qaydlar (Admin Notes) va CSV/JSON eksport imkoniyatlari mavjud.
 
 ---
 

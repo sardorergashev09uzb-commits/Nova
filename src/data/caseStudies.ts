@@ -21,6 +21,9 @@ export const conceptualCaseStudies: CaseStudy[] = [
     ],
     metricsContext: "Konseptual sinovda tashrif buyuruvchilarning mahsulot tafsilotlarini o‘rganish vaqti 2.5 barobarga oshdi.",
     featured: true,
+    imageUrl: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
+    accentColor: "#d97706",
+    mockupType: "editorial",
     challengeDetails: [
       "Ommaviy e-commerce shablonlari buyumlarni oddiy tovar kabi ko‘rsatar, buyurtmachi uchun arxitekturaviy qadr-qimmat yo‘qolardi.",
       "Materiallar sifati (eman, yong‘oq yog‘ochi, qo‘l mehnati) yetarli darajada ochib berilmas edi.",
@@ -59,6 +62,9 @@ export const conceptualCaseStudies: CaseStudy[] = [
     ],
     metricsContext: "B2B auditoriya uchun o‘rtacha shakl to‘ldirish darajasi 6.8% ga teng bo‘ldi.",
     featured: true,
+    imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    accentColor: "#1d4ed8",
+    mockupType: "landing",
     challengeDetails: [
       "Yirik ishlab chiqaruvchilar noaniq takliflardan charchagan edi — ularga aniq tranzit vaqtlari kerak edi.",
       "Kompaniyaning avvalgi sayti juda og‘ir bo‘lib, mobil internetda 6 soniyada yuklanardi.",
@@ -97,6 +103,9 @@ export const conceptualCaseStudies: CaseStudy[] = [
     ],
     metricsContext: "Katalog orqali qabul qilingan arizalarning 82%i birinchi qo‘ng‘iroqdayoq buyurtmaga aylandi.",
     featured: false,
+    imageUrl: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+    accentColor: "#ea580c",
+    mockupType: "catalog",
     challengeDetails: [
       "Specialty kofe xaridorlari oddiy xaridor emas — ular dori balandligi (masl), qayta ishlash usuli va notalarni talab qiladi.",
       "Kompaniya har oy yangi partiya donlarini kiritardi, katalog oson yangilanuvchi bo‘lishi shart edi.",
@@ -135,6 +144,9 @@ export const conceptualCaseStudies: CaseStudy[] = [
     ],
     metricsContext: "Ombor buyurtmalarini shakllantirish vaqti 3 soatdan 15 daqiqagacha qisqardi.",
     featured: false,
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    accentColor: "#6366f1",
+    mockupType: "dashboard",
     challengeDetails: [
       "Har bir filial har xil usulda qoldiq yuritgani uchun markaziy ombor rejalashtirishda xato qilardi.",
       "Standart ERP tizimlari juda og‘ir, qimmat va o‘rganish uchun oylarcha vaqt talab qilardi.",

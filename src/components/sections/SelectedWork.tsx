@@ -68,58 +68,81 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenCaseStudy }) =
             <div
               key={study.id}
               onClick={() => onOpenCaseStudy && onOpenCaseStudy(study)}
-              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 motion-elevate flex flex-col justify-between cursor-pointer"
+              className="group bg-white border border-studio-border hover:border-cobalt-600 transition-all duration-300 motion-elevate flex flex-col justify-between cursor-pointer overflow-hidden card-glow shadow-sm"
             >
-              <div className="p-8 space-y-6">
-                {/* Meta Bar */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <div className="flex items-center gap-2">
-                    <Badge variant={idx % 2 === 0 ? 'cobalt' : 'orange'}>
-                      {study.category}
-                    </Badge>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      Concept #{idx + 1}
+              {/* Visual Mockup Cover */}
+              {study.imageUrl && (
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-studio-black">
+                  <img
+                    src={study.imageUrl}
+                    alt={study.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-studio-black/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-white">
+                    <span className="bg-studio-black/80 backdrop-blur-sm px-2.5 py-1 border border-white/20 font-medium">
+                      Konseptual Prototip
+                    </span>
+                    <span className="text-warmOrange-400 font-bold bg-studio-black/80 backdrop-blur-sm px-2 py-0.5 border border-warmOrange-500/30">
+                      Case Study
                     </span>
                   </div>
-                  <span className="text-xs font-mono text-studio-muted">
-                    {study.clientType}
-                  </span>
                 </div>
+              )}
 
-                {/* Title & Subtitle */}
-                <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-studio-black group-hover:text-cobalt-600 transition-colors">
-                    {study.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-studio-muted leading-relaxed line-clamp-2">
-                    {study.subtitle}
-                  </p>
-                </div>
-
-                {/* Problem & Approach Teaser */}
-                <div className="bg-studio-bgLight/60 p-5 border border-studio-border/70 space-y-3 text-xs">
-                  <div>
-                    <span className="font-mono uppercase font-bold text-studio-black mr-2">Muammo:</span>
-                    <span className="text-studio-muted line-clamp-2">{study.problem}</span>
+              <div className="p-6 sm:p-8 space-y-6 flex-grow flex flex-col justify-between">
+                <div>
+                  {/* Meta Bar */}
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div className="flex items-center gap-2">
+                      <Badge variant={idx % 2 === 0 ? 'cobalt' : 'orange'}>
+                        {study.category}
+                      </Badge>
+                      <span className="text-[11px] font-mono text-slate-400">
+                        Concept #{idx + 1}
+                      </span>
+                    </div>
+                    <span className="text-xs font-mono text-studio-muted">
+                      {study.clientType}
+                    </span>
                   </div>
-                  <div>
-                    <span className="font-mono uppercase font-bold text-cobalt-600 mr-2">Yechim:</span>
-                    <span className="text-studio-dark line-clamp-2">{study.solution}</span>
+
+                  {/* Title & Subtitle */}
+                  <div className="space-y-2 pt-4">
+                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-studio-black group-hover:text-cobalt-600 transition-colors">
+                      {study.title}
+                    </h3>
+                    <p className="text-sm text-studio-muted leading-relaxed line-clamp-2">
+                      {study.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Problem & Approach Teaser */}
+                  <div className="bg-studio-bgLight/60 p-4 border border-studio-border/70 space-y-2 text-xs mt-4">
+                    <div>
+                      <span className="font-mono uppercase font-bold text-studio-black mr-2">Muammo:</span>
+                      <span className="text-studio-muted line-clamp-2">{study.problem}</span>
+                    </div>
+                    <div>
+                      <span className="font-mono uppercase font-bold text-cobalt-600 mr-2">Yechim:</span>
+                      <span className="text-studio-dark line-clamp-2">{study.solution}</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Deliverables tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
+                <div className="flex flex-wrap gap-1.5 pt-4">
                   {study.deliverables.slice(0, 3).map((item, dIdx) => (
                     <span
                       key={dIdx}
-                      className="inline-block px-2 py-0.5 text-[11px] font-mono bg-slate-100 text-slate-600"
+                      className="inline-block px-2.5 py-1 text-[11px] font-mono bg-slate-100 text-slate-700"
                     >
                       {item}
                     </span>
                   ))}
                   {study.deliverables.length > 3 && (
-                    <span className="inline-block px-2 py-0.5 text-[11px] font-mono bg-slate-100 text-slate-400">
+                    <span className="inline-block px-2 py-1 text-[11px] font-mono bg-slate-100 text-slate-400">
                       +{study.deliverables.length - 3}
                     </span>
                   )}

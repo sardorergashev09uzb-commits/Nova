@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { Eyebrow } from '../ui/Eyebrow';
 import { Heading } from '../ui/Heading';
-import { Sparkles, ArrowDown, Compass, ShieldCheck, Zap } from 'lucide-react';
+import { Sparkles, ArrowDown, Compass, ShieldCheck, Zap, Clock } from 'lucide-react';
 
 interface HeroProps {
   onExploreServices?: () => void;
@@ -11,6 +11,24 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onExploreServices, onExploreFinder }) => {
+  const [timeStr, setTimeStr] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTimeStr(
+        now.toLocaleTimeString('uz-UZ', {
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'Asia/Tashkent',
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000 * 30);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -19,25 +37,32 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onExploreFinder }
   };
 
   return (
-    <section id="hero" className="relative pt-12 pb-20 md:pt-20 md:pb-32 border-b border-studio-border overflow-hidden bg-studio-bgLight">
+    <section id="hero" className="relative pt-10 pb-20 md:pt-16 md:pb-32 border-b border-studio-border overflow-hidden bg-studio-bgLight film-grain">
       {/* Editorial Decorative Grid Background Lines */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#0a0f1d_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
+      {/* Subtle Warm & Cobalt Ambient Glows */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cobalt-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-warmOrange-500/10 rounded-full blur-3xl pointer-events-none" />
+
       <Container size="wide">
-        {/* Top Studio Meta Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-studio-border mb-12 text-xs font-mono">
+        {/* Top Studio Meta Strip with Live Tashkent Clock */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-studio-border mb-12 text-xs font-mono">
           <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-warmOrange-500 animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-studio-black font-semibold tracking-wider uppercase">NOVA® Digital Studio</span>
-            <span className="text-studio-muted">/</span>
-            <span className="text-studio-muted">Toshkent & Masofaviy Hamkorlik</span>
+            <span className="text-slate-400">/</span>
+            <span className="text-slate-600 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
+              <span>Toshkent {timeStr || '16:00'} (GMT+5) · Qabul Faol</span>
+            </span>
           </div>
-          <div className="flex items-center gap-6 text-studio-muted hidden sm:flex">
+          <div className="flex items-center gap-6 text-slate-500 hidden sm:flex">
             <span>Konseptual Web Dizayn</span>
             <span>·</span>
             <span>Interaktiv Yechimlar</span>
             <span>·</span>
-            <span>2026 Edition</span>
+            <span className="px-2 py-0.5 bg-slate-200 text-slate-800 text-[10px] font-bold">2026 EDITION</span>
           </div>
         </div>
 

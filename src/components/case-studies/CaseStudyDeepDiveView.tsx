@@ -70,6 +70,26 @@ export const CaseStudyDeepDiveView: React.FC<CaseStudyDeepDiveViewProps> = ({
           <p className="text-base sm:text-lg text-studio-muted leading-relaxed font-sans">
             {study.summary}
           </p>
+
+          {/* Hero Visual Mockup Banner */}
+          {study.imageUrl && (
+            <div className="relative aspect-[16/8] sm:aspect-[21/9] w-full overflow-hidden bg-studio-black border-2 border-studio-black mt-8 shadow-xl">
+              <img
+                src={study.imageUrl}
+                alt={study.title}
+                className="w-full h-full object-cover opacity-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-studio-black/85 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-white">
+                <span className="bg-white/10 backdrop-blur-md px-3 py-1 border border-white/20">
+                  {study.clientType}
+                </span>
+                <span className="text-warmOrange-400 font-bold bg-studio-black/80 px-3 py-1 border border-warmOrange-500/30">
+                  {study.metricsContext}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Deep Dive 2-Column Grid */}

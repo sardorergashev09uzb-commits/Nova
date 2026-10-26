@@ -55,7 +55,39 @@
   .scroll-indicator::-webkit-scrollbar-thumb {
     background: #cbd5e1;
   }
-  .scroll-indicator::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+  /* Marquee infinite linear scroll */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none !important;
+    }
+  }
+
+  /* Analog film grain aesthetic overlay */
+  .film-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* 3D card tilt & ambient glow */
+  .card-glow:hover {
+    box-shadow: 0 20px 40px -15px rgba(29, 78, 216, 0.12), 0 0 25px -5px rgba(234, 88, 12, 0.08);
   }
 }
